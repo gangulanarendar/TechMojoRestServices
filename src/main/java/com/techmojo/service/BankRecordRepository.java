@@ -15,6 +15,7 @@ public interface BankRecordRepository  extends CrudRepository<BankRecord, Long> 
 	List<BankRecord> findByIfsc(@Param("ifsc") String ifsc);
 	List<BankRecord> findByCity(@Param("city") String city);
 	List<BankRecord> findByState(@Param("state") String state);
+	void deleteAll();
 	
     @Query("SELECT b FROM BankRecord b WHERE b.bank=:bank and b.ifsc=:ifsc")
     List<BankRecord> fetchBankInfo(@Param("bank") String bank, @Param("ifsc") String ifsc);

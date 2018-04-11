@@ -37,6 +37,7 @@ public class ScheduledTasks {
 
     @Scheduled(cron="*/60 * * * * *")
     public void reportCurrentTime() {
+    	bankRecordService.deleteAllRecords();
     	HttpDownloadClient downloadClient=new HttpDownloadClient();
     	downloadClient.downloadFileFromServer("https://rbidocs.rbi.org.in/rdocs/Content/DOCs/IFCB2009_01.xls");
     	ExcelReader excelReader=new ExcelReader();

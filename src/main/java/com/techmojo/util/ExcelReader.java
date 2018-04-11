@@ -13,6 +13,8 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.techmojo.model.BankRecord;
 
@@ -23,6 +25,8 @@ import com.techmojo.model.BankRecord;
  *         storing it in Java Objects
  */
 public class ExcelReader {
+	private static final Logger LOGGER = LoggerFactory.getLogger(ExcelReader.class);
+	 
 	DecimalFormat df = new DecimalFormat("#.00");
 
 	public static void main(String[] args) throws IOException, ParseException {
@@ -38,11 +42,13 @@ public class ExcelReader {
 
 	
 	public ArrayList<BankRecord> processRequest(String filePath) throws IOException, ParseException {
+		LOGGER.info("processRequest ",filePath);
 		ExcelReaderUtility excelReaderUtility = new ExcelReaderUtility();
 		ExcelReader excelReader = new ExcelReader();
 		HSSFWorkbook workbook = excelReaderUtility
 				.readExcelFile(filePath);
 		HSSFSheet sheet = (HSSFSheet) excelReaderUtility.getActualsSheet(workbook);
+		LOGGER.info("processRequest completed");
 		return excelReader.getBankRecordDTOList(workbook, sheet);
 		
 	}	
@@ -58,24 +64,24 @@ public class ExcelReader {
 	 */
 	public ArrayList<BankRecord> getBankRecordDTOList(HSSFWorkbook workbook, Sheet sheet)
 			throws ParseException {
+		LOGGER.info("getBankRecordDTOList stared ");
 		ArrayList<BankRecord> bankRecordDTOs = new ArrayList<BankRecord>();
 		// System.out.println(sheet.getLastRowNum());
 		Iterator<Row> rowIterator = sheet.iterator();
 		Iterator<Cell> cellIterator;
 		HSSFCell cell;
 		
-		boolean rowskipper = true;
+	
 		BankRecord banlRecordDTO;
-		
+		if(rowIterator.hasNext())
+		{
+			rowIterator.next();
+		}
 		while (rowIterator.hasNext()) {
-			
 			HSSFRow row = (HSSFRow) rowIterator.next();
-			if (row.getRowNum() <=1 ) {
-				System.out.println("row.getRowNum()"+row.getRowNum());
-				if (rowskipper) {
-					rowskipper = false;
-					continue;
-				}
+			//System.out.println(row.getRowNum());
+			
+			
 				banlRecordDTO = new BankRecord();
 				// System.out.println("row.getRowNum() "+row.getRowNum());
 				cellIterator = row.cellIterator();
@@ -95,8 +101,8 @@ public class ExcelReader {
 						if (cell.getColumnIndex() == 2) {
 							
 								banlRecordDTO.setMicr(""+cell.getNumericCellValue());
-/*
-							if (cell.getStringCellValue() != null && !cell.getStringCellValue().equals(""))
+
+							/*if (cell.getStringCellValue() != null && !cell.getStringCellValue().equals(""))
 								banlRecordDTO.setBranch(cell.getStringCellValue().trim());*/
 						
 						}
@@ -131,7 +137,11 @@ public class ExcelReader {
 				} // while loop end cell iterator
 				bankRecordDTOs.add(banlRecordDTO);
 			}
-		} // while loop end row iterator
+		
+		
+	//	} // while loop end row iterator
+		
+		LOGGER.info("getBankRecordDTOList size "+bankRecordDTOs.size());
 		return bankRecordDTOs;
 	}
 }

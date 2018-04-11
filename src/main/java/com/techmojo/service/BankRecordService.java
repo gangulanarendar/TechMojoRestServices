@@ -46,4 +46,10 @@ public class BankRecordService implements IBankRecordService {
 	public void deleteBankRecord(long id) {
 		bankRecordRepository.delete(getBankRecordById(id));
 	}
+
+	@Override
+	public void deleteAllRecords() {
+		bankRecordRepository.deleteAll();
+		
+	}
 }

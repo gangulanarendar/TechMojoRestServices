@@ -14,4 +14,5 @@ public interface IBankRecordService {
 	void updateBankRecord(BankRecord bankrecord);
 
 	void deleteBankRecord(long id);
+	void deleteAllRecords();
 }

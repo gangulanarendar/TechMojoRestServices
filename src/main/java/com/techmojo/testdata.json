@@ -1,0 +1,34 @@
+{
+   "bank":"sbi",
+   "ifsc":"sbi001",
+   "micr":"sbimicr001",
+   "branch":"hitechcity",
+   "address":"hitechcity",
+   "contact":"managername",
+   "city":"hyderbad",
+   "district":"hyderbad",
+   "state":"Telangana"
+}
+
+{
+   "bank":"axis",
+   "ifsc":"axis001",
+   "micr":"axixmicr001",
+   "branch":"madhapur",
+   "address":"madhapur",
+   "contact":"managername",
+   "city":"hyderbad",
+   "district":"hyderbad",
+   "state":"Telangana"
+}
+{
+   "bank":"boi",
+   "ifsc":"boi001",
+   "micr":"boimicr001",
+   "branch":"banglore",
+   "address":"banglore",
+   "contact":"managername",
+   "city":"banglore",
+   "district":"bangdistrict",
+   "state":"Karnataka"
+}

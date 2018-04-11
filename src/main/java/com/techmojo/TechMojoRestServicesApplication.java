@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableScheduling	
 @ComponentScans({ @ComponentScan("com.techmojo.service")
-})
+,@ComponentScan("com.techmojo.util")})
 @EntityScan("com.techmojo.model")
 @EnableJpaRepositories("com.techmojo.service")
 

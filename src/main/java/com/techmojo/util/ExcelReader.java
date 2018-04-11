@@ -15,6 +15,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import com.techmojo.model.BankRecord;
 
@@ -24,6 +25,7 @@ import com.techmojo.model.BankRecord;
  *         This Class is responsible for reading the values from Excel file and
  *         storing it in Java Objects
  */
+@Service
 public class ExcelReader {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExcelReader.class);
 	 

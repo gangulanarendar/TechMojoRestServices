@@ -7,6 +7,7 @@ import java.io.IOException;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.springframework.stereotype.Service;
 
 /**
  * @author narendar.gangula
@@ -14,6 +15,7 @@ import org.apache.poi.ss.usermodel.Sheet;
  *         This class is acts like utility for reading the Excel file.
  * 
  */
+@Service
 public class ExcelReaderUtility {
 
 	public HSSFWorkbook readExcelFile(String filepath) throws IOException {

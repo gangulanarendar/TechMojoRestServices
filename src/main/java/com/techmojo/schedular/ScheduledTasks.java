@@ -21,8 +21,13 @@ public class ScheduledTasks {
 	@Autowired
 	private BankRecordService bankRecordService;
 	
+	@Autowired
+	private HttpDownloadClient httpDownloadClient;
 	
-
+	@Autowired
+	ExcelReader excelReader;
+	
+	
     public BankRecordService getBankRecordService() {
 		return bankRecordService;
 	}
@@ -38,9 +43,9 @@ public class ScheduledTasks {
     @Scheduled(cron="*/60 * * * * *")
     public void reportCurrentTime() {
     	bankRecordService.deleteAllRecords();
-    	HttpDownloadClient downloadClient=new HttpDownloadClient();
-    	downloadClient.downloadFileFromServer("https://rbidocs.rbi.org.in/rdocs/Content/DOCs/IFCB2009_01.xls");
-    	ExcelReader excelReader=new ExcelReader();
+    	httpDownloadClient=new HttpDownloadClient();
+    	httpDownloadClient.downloadFileFromServer("https://rbidocs.rbi.org.in/rdocs/Content/DOCs/IFCB2009_01.xls");
+    	
     	try {
     		ArrayList<BankRecord> bankRecordsDtos=excelReader.processRequest("./ExternalResource/IFCB2009_01.xls");
     		for(BankRecord record:bankRecordsDtos)
